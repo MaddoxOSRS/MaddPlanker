@@ -30,20 +30,20 @@ public class Cast extends Task {
     @Override
     public void execute() {
         System.out.println("Casting task");
-        if (Inventory.stream().name(GV.logs).count() == 26) {
+        if (Inventory.stream().name(GV.logs).isEmpty()) {
             System.out.println("should cast");
-            Magic.LunarSpell.PLANK_MAKE.cast();
-            Condition.sleep(Random.nextGaussian(1700, 2500, 250));
-            //Inventory.stream().name(GV.logs).action("Cast");
-            Inventory.stream().name(GV.logs).first().click();
-                    System.out.println("Did cast");
-            Condition.sleep(Random.nextGaussian(1700, 2500, 250));
-            Condition.wait(() -> Players.local().animation() == -1, 100, 20);
-        }
-        if (Inventory.stream().name(GV.planks).count() == 26) {
-            System.out.println("Clicking bank");
-            Bank.open();
-            Condition.wait(() -> Bank.opened(), 250, 150);
+            if (Magic.LunarSpell.PLANK_MAKE.canCast() && Magic.LunarSpell.PLANK_MAKE.cast()) {
+                if(Condition.wait(()->Game.tab().equals(Game.Tab.INVENTORY),50, 50)){
+                    Inventory.stream().name(GV.logs).first().click();
+                }
+            }
+                System.out.println("Did cast");
+                Condition.wait(() -> Players.local().animation() == -1, 100, 20);
+            }
+            if (Inventory.stream().name(GV.logs).isEmpty()) {
+                System.out.println("Clicking bank");
+                Bank.open();
+                Condition.wait(() -> Bank.opened(), 250, 150);
+            }
         }
     }
-}

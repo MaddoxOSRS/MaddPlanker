@@ -24,7 +24,7 @@ public class Withdraw extends Task {
 
     @Override
     public boolean activate() {
-        return Bank.opened() && Widgets.component(12, 20).visible();
+        return Bank.opened();
     }
 
     @Override
@@ -36,11 +36,11 @@ public class Withdraw extends Task {
             ScriptManager.INSTANCE.stop();
         }
 
-        if (Bank.depositAllExcept("Rune pouch", "Coins")) {
+        if (Bank.depositAllExcept("Rune pouch", "Coins") || Bank.depositAllExcept("Coins", "Astral rune", "Nature rune", "Earth rune")) {
             System.out.println("Deposited everything except rune pouch");
         }
 
-        if (Inventory.stream().name(GV.logs).count() < 1) {
+        if (Inventory.stream().name(GV.logs).isEmpty()) {
             System.out.println("Withdrawing logs");
             Bank.withdraw(GV.logs, Bank.Amount.ALL);
             Condition.wait(() -> Inventory.stream().name(GV.logs).count() > 0, 150, 15);
