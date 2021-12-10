@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="client-sdk-loader">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../essminer/libs/client-sdk-loader.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../essminer/libs/client-sdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
