@@ -1,18 +1,15 @@
 package madd;
 
-import com.google.common.eventbus.Subscribe;
+
+import madd.SharedPackage.Constants;
 import madd.Tasks.Cast;
 import org.powbot.api.Color;
-import org.powbot.api.Preferences;
-import org.powbot.api.event.RenderEvent;
-import org.powbot.api.rt4.Constants;
 import org.powbot.api.rt4.Game;
 import org.powbot.api.rt4.Skills;
 import org.powbot.api.rt4.walking.model.Skill;
 import org.powbot.api.script.*;
 import org.powbot.api.script.paint.Paint;
 import org.powbot.api.script.paint.PaintBuilder;
-import org.powbot.mobile.drawing.Graphics;
 import org.powbot.mobile.script.ScriptManager;
 import org.powbot.mobile.service.ScriptUploader;
 import madd.SharedPackage.Task;
@@ -77,10 +74,13 @@ public class MaddSpell extends AbstractScript {
         taskList.add(new Cast(this));
             if (Game.loggedIn() && ! xpConfirmed) {
                 xpConfirmed = true;
-                startXp = Skills.experience(Constants.SKILLS_MAGIC);
+                startXp = Skills.experience(org.powbot.api.rt4.Constants.SKILLS_MAGIC);
                 Paint p = new PaintBuilder()
                         .backgroundColor(Color.argb(128, 128, 20, 20))
                         .trackSkill(Skill.Magic)
+                        .trackInventoryItems(Constants.OAKPLANK)
+                        .trackInventoryItems(Constants.TEAKPLANK)
+                        .trackInventoryItems(Constants.MAHOGPLANK)
                         .x(30).y(50)
                         .build();
 
