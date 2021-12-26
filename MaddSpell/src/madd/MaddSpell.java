@@ -23,15 +23,6 @@ import java.util.ArrayList;
         version = "1.0.0", category = ScriptCategory.Magic)
 
 @ScriptConfiguration(
-        name = "Minutes",
-        description = "How many minutes do you want to run the script?",
-        defaultValue = "",
-        optionType = OptionType.INTEGER,
-        enabled = true,
-        visible = true
-)
-
-@ScriptConfiguration(
         name = "Select log",
         description = "What log do you want to turn to plank?",
         defaultValue = "Oak logs",
@@ -51,6 +42,7 @@ public class MaddSpell extends AbstractScript {
     int minutes;
     public boolean xpConfirmed;
     public long lastActivated = 0;
+    public String currentStatus = "";
     long currentRuntime = ScriptManager.INSTANCE.getRuntime(true);
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
@@ -78,11 +70,12 @@ public class MaddSpell extends AbstractScript {
                 startXp = Skills.experience(org.powbot.api.rt4.Constants.SKILLS_MAGIC);
                 Paint p = new PaintBuilder()
                         .backgroundColor(Color.argb(128, 128, 20, 20))
+                        .addString("Current Task: ", () -> (currentStatus))
                         .trackSkill(Skill.Magic)
                         .trackInventoryItems(Constants.OAKPLANK)
                         .trackInventoryItems(Constants.TEAKPLANK)
                         .trackInventoryItems(Constants.MAHOGPLANK)
-                        .trackInventoryItem(995, "Spent", TrackInventoryOption.Price)  .x(30).y(50)
+                        .trackInventoryItem(995, "Spent", TrackInventoryOption.Price)
                         .build();
 
                 addPaint(p);

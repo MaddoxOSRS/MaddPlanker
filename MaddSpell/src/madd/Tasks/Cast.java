@@ -29,6 +29,7 @@ public class Cast extends Task {
 
     @Override
     public void execute() {
+        main.currentStatus = "Making them planks 4u...";
         System.out.println("Casting task");
         if (Inventory.stream().name(GV.logs).isNotEmpty()) {
             System.out.println("should cast");

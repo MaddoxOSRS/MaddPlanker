@@ -29,7 +29,7 @@ public class Withdraw extends Task {
 
     @Override
     public void execute() {
-
+        main.currentStatus = "Withdrawing the goods...";
         System.out.println("Bank task activated");
 
         if (Bank.stream().name(GV.logs).count() == 0) {
