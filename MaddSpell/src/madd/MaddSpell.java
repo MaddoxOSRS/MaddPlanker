@@ -10,6 +10,7 @@ import org.powbot.api.rt4.walking.model.Skill;
 import org.powbot.api.script.*;
 import org.powbot.api.script.paint.Paint;
 import org.powbot.api.script.paint.PaintBuilder;
+import org.powbot.api.script.paint.TrackInventoryOption;
 import org.powbot.mobile.script.ScriptManager;
 import org.powbot.mobile.service.ScriptUploader;
 import madd.SharedPackage.Task;
@@ -81,7 +82,7 @@ public class MaddSpell extends AbstractScript {
                         .trackInventoryItems(Constants.OAKPLANK)
                         .trackInventoryItems(Constants.TEAKPLANK)
                         .trackInventoryItems(Constants.MAHOGPLANK)
-                        .x(30).y(50)
+                        .trackInventoryItem(995, "Spent", TrackInventoryOption.Price)  .x(30).y(50)
                         .build();
 
                 addPaint(p);
